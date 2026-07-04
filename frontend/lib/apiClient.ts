@@ -1,6 +1,6 @@
 import { createClient } from './supabaseClient';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://unveilearth.onrender.com';
 
 export class ApiError extends Error {
   public status: number;
@@ -17,7 +17,7 @@ export class ApiError extends Error {
 async function getAuthHeader(): Promise<HeadersInit> {
   const supabase = createClient();
   const { data: { session } } = await supabase.auth.getSession();
-  
+
   if (session?.access_token) {
     return {
       'Authorization': `Bearer ${session.access_token}`
@@ -28,7 +28,7 @@ async function getAuthHeader(): Promise<HeadersInit> {
 
 async function fetchWithAuth(endpoint: string, options: RequestInit = {}) {
   const authHeader = await getAuthHeader();
-  
+
   const headers = {
     'Content-Type': 'application/json',
     ...authHeader,
@@ -47,7 +47,7 @@ async function fetchWithAuth(endpoint: string, options: RequestInit = {}) {
     } catch {
       throw new ApiError('An unexpected error occurred', response.status);
     }
-    
+
     throw new ApiError(
       errorData.error?.message || 'API request failed',
       response.status,
@@ -61,38 +61,38 @@ async function fetchWithAuth(endpoint: string, options: RequestInit = {}) {
     const json = await response.json();
     return json.data || json;
   }
-  
+
   return response;
 }
 
 export const apiClient = {
-  get: <T>(endpoint: string, options?: RequestInit): Promise<T> => 
+  get: <T>(endpoint: string, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, { ...options, method: 'GET' }),
-    
-  post: <T>(endpoint: string, data: any, options?: RequestInit): Promise<T> => 
+
+  post: <T>(endpoint: string, data: any, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, {
       ...options,
       method: 'POST',
       body: JSON.stringify(data),
     }),
-    
+
   put: <T>(endpoint: string, data: any, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, {
       ...options,
       method: 'PUT',
       body: JSON.stringify(data),
     }),
-    
+
   patch: <T>(endpoint: string, data: any, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, {
       ...options,
       method: 'PATCH',
       body: JSON.stringify(data),
     }),
-    
+
   delete: <T>(endpoint: string, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, { ...options, method: 'DELETE' }),
-    
+
   // Helper for SSE streaming
   stream: async function* (endpoint: string, data: any) {
     const authHeader = await getAuthHeader();
@@ -122,12 +122,12 @@ export const apiClient = {
       while (true) {
         const { value, done } = await reader.read();
         if (done) break;
-        
+
         buffer += decoder.decode(value, { stream: true });
-        
+
         const lines = buffer.split('\n');
         buffer = lines.pop() || ''; // Keep the last incomplete line in the buffer
-        
+
         for (const line of lines) {
           if (line.startsWith('data: ')) {
             const dataStr = line.slice(6);
