@@ -53,6 +53,12 @@ export function LoginForm() {
         <p className="text-sm text-muted-foreground mt-2">Log in to continue your journey</p>
       </div>
 
+      <div className="bg-primary/10 border border-primary/20 p-3 rounded-lg text-sm text-center">
+        <p className="font-semibold text-primary mb-1">Hackathon Demo Account</p>
+        <p className="text-muted-foreground text-xs">Email: <span className="font-mono bg-background px-1 py-0.5 rounded">testuser3@example.com</span></p>
+        <p className="text-muted-foreground text-xs">Password: <span className="font-mono bg-background px-1 py-0.5 rounded">password123</span></p>
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {error && (
           <div className="p-3 text-sm text-red-500 bg-red-50 dark:bg-red-950/20 rounded-md">
@@ -61,8 +67,9 @@ export function LoginForm() {
         )}
         
         <div className="space-y-2">
-          <label className="text-sm font-medium">Email</label>
+          <label htmlFor="email" className="text-sm font-medium">Email</label>
           <Input 
+            id="email"
             type="email" 
             placeholder="you@example.com" 
             {...register("email")}
@@ -73,12 +80,13 @@ export function LoginForm() {
 
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium">Password</label>
+            <label htmlFor="password" className="text-sm font-medium">Password</label>
             <Link href="/forgot-password" className="text-xs text-primary hover:underline font-medium">
               Forgot password?
             </Link>
           </div>
           <Input 
+            id="password"
             type="password" 
             {...register("password")}
             className={errors.password ? "border-red-500" : ""}
@@ -92,7 +100,7 @@ export function LoginForm() {
       </form>
 
       <div className="text-center text-sm">
-        <span className="text-muted-foreground">Don't have an account? </span>
+        <span className="text-muted-foreground">Don&apos;t have an account? </span>
         <Link href="/signup" className="text-primary hover:underline font-medium">
           Sign up
         </Link>
