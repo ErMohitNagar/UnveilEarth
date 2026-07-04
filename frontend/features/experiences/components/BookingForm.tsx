@@ -43,7 +43,7 @@ export function BookingForm({ experience }: { experience: Experience }) {
     return (
       <div className="bg-green-50 dark:bg-green-950/20 text-green-600 dark:text-green-400 p-6 rounded-2xl border border-green-200 dark:border-green-900 text-center">
         <h3 className="font-bold font-outfit text-xl mb-2">Booking Confirmed!</h3>
-        <p>Your local experience has been successfully booked. We've sent the details to your email.</p>
+        <p>Your local experience has been successfully booked. We&apos;ve sent the details to your email.</p>
       </div>
     );
   }
@@ -60,8 +60,9 @@ export function BookingForm({ experience }: { experience: Experience }) {
         )}
         
         <div className="space-y-2">
-          <label className="text-sm font-medium">Date</label>
+          <label htmlFor="bookingDate" className="text-sm font-medium">Date</label>
           <Input 
+            id="bookingDate"
             type="date" 
             {...register("bookingDate")}
             className={errors.bookingDate ? "border-red-500" : ""}
@@ -70,8 +71,9 @@ export function BookingForm({ experience }: { experience: Experience }) {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Number of Participants</label>
+          <label htmlFor="participants" className="text-sm font-medium">Number of Participants</label>
           <Input 
+            id="participants"
             type="number" 
             min="1"
             max={experience.maxParticipants || 20}
@@ -82,8 +84,9 @@ export function BookingForm({ experience }: { experience: Experience }) {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Notes for the guide (Optional)</label>
+          <label htmlFor="notes" className="text-sm font-medium">Notes for the guide (Optional)</label>
           <Input 
+            id="notes"
             type="text" 
             placeholder="Special requirements or questions..."
             {...register("notes")}

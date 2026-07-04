@@ -78,8 +78,9 @@ export function SignUpForm() {
         )}
         
         <div className="space-y-2">
-          <label className="text-sm font-medium">Name</label>
+          <label htmlFor="displayName" className="text-sm font-medium">Name</label>
           <Input 
+            id="displayName"
             placeholder="Jane Doe" 
             {...register("displayName")}
             className={errors.displayName ? "border-red-500" : ""}
@@ -88,8 +89,9 @@ export function SignUpForm() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Email</label>
+          <label htmlFor="email" className="text-sm font-medium">Email</label>
           <Input 
+            id="email"
             type="email" 
             placeholder="you@example.com" 
             {...register("email")}
@@ -99,8 +101,9 @@ export function SignUpForm() {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Password</label>
+          <label htmlFor="password" className="text-sm font-medium">Password</label>
           <Input 
+            id="password"
             type="password" 
             {...register("password")}
             className={errors.password ? "border-red-500" : ""}

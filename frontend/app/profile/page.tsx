@@ -53,7 +53,7 @@ export default function ProfilePage() {
             <h2 className="text-xl font-semibold font-outfit">Saved Destinations</h2>
           </div>
           <p className="text-muted-foreground text-sm">
-            You haven't saved any destinations yet. Explore the world and save your favorites here.
+            You haven&apos;t saved any destinations yet. Explore the world and save your favorites here.
           </p>
         </div>
 

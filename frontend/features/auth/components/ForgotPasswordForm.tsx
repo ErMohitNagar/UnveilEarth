@@ -60,7 +60,7 @@ export function ForgotPasswordForm() {
     <div className="w-full max-w-md p-8 space-y-6 bg-card border rounded-2xl shadow-sm">
       <div className="text-center">
         <h2 className="text-2xl font-bold font-outfit">Reset password</h2>
-        <p className="text-sm text-muted-foreground mt-2">Enter your email and we'll send you a reset link</p>
+        <p className="text-sm text-muted-foreground mt-2">Enter your email and we&apos;ll send you a reset link</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

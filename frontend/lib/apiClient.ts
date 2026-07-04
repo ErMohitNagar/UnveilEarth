@@ -69,21 +69,21 @@ export const apiClient = {
   get: <T>(endpoint: string, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, { ...options, method: 'GET' }),
 
-  post: <T>(endpoint: string, data: any, options?: RequestInit): Promise<T> =>
+  post: <T>(endpoint: string, data: Record<string, unknown> | unknown, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, {
       ...options,
       method: 'POST',
       body: JSON.stringify(data),
     }),
 
-  put: <T>(endpoint: string, data: any, options?: RequestInit): Promise<T> =>
+  put: <T>(endpoint: string, data: Record<string, unknown> | unknown, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, {
       ...options,
       method: 'PUT',
       body: JSON.stringify(data),
     }),
 
-  patch: <T>(endpoint: string, data: any, options?: RequestInit): Promise<T> =>
+  patch: <T>(endpoint: string, data: Record<string, unknown> | unknown, options?: RequestInit): Promise<T> =>
     fetchWithAuth(endpoint, {
       ...options,
       method: 'PATCH',
@@ -94,7 +94,7 @@ export const apiClient = {
     fetchWithAuth(endpoint, { ...options, method: 'DELETE' }),
 
   // Helper for SSE streaming
-  stream: async function* (endpoint: string, data: any) {
+  stream: async function* (endpoint: string, data: Record<string, unknown> | unknown) {
     const authHeader = await getAuthHeader();
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: 'POST',
